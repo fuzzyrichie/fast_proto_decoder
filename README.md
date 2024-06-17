@@ -2,11 +2,9 @@
 A fast, lightweight Protobuf message decoder when you don't have the schema. Takes guesses on some fields in order to improve on speed.
 
 ## Overview
-====
 Ever needed to debug a Protobuf message without the full context of what data is included in it? I did for a security project I was working on. Existing libraries missed a few decodings or were too slow for what I needed. I also realized that I was OK with the tradeoff of some decoding misses for certain types of data in order to improve on overall speed.
 
 ## How to Use
-====
 Take the hex string of a Protobuf message, call fast_decoder, and you're set:
 
 ```python
@@ -17,6 +15,7 @@ a = "0a2f0a084a6f686e20446f6510011a106a6f686e406578616d706c652e636f6d220f0a0b313
 print(json.dumps(fast_decoder(a), indent=2))
 ```
 
+Yields the following output:
 ```json
 {
   "1": [
@@ -39,20 +38,17 @@ print(json.dumps(fast_decoder(a), indent=2))
 ```
 
 ## Pros
-====
 - Faster than previous Protobuf decoders by multiple orders of magnitude.
 - Catches many fields that other Protobuf decoders miss or incorrectly parse.
 - Directly converts the Protobuf message into JSON.
 - Less than 150 lines of code in total :smile:
 
 ## Cons
-====
 - Does not float up the original field type of the underlying Protobuf message, making it difficult to determine if an incorrect parsing has occurred.
 - Does some guessing on what the field could be, which could lead to some incorrect parsing on some messages.
 - Does not support groups, which are deprecated in newer versions of the Protobuf specification.
 
 ## References
-====
 - https://protobuf.dev/programming-guides/encoding/
 - https://github.com/pawitp/protobuf-decoder/
 - https://github.com/dannyhann/protobuf_decoder/
